@@ -51,12 +51,15 @@ class LogentriesRunnable implements Runnable {
     void sendToLogentries(String message) throws IOException {
         if (message != null) {
             String[] lines = message.split("\\r?\\n");
-            for (String line : lines) {
-                line = StringUtils.trimToNull(line);
-                if (line != null) {
-                    try (Socket socket = new Socket(config.getHost(), config.getPort())) {
-                        try (OutputStream outputStream = socket.getOutputStream()) {
-                            IOUtils.write(config.getToken() + " " + line, outputStream);
+            if (lines.length > 0) {
+                try (Socket socket = new Socket(config.getHost(), config.getPort())) {
+                    try (OutputStream outputStream = socket.getOutputStream()) {
+                        for (String line : lines) {
+                            line = StringUtils.trimToNull(line);
+                            if (line != null) {
+                                IOUtils.write(config.getToken() + " " + line, outputStream);
+                                outputStream.flush();
+                            }
                         }
                     }
                 }

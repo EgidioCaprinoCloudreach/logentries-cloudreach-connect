@@ -5,7 +5,8 @@ import org.junit.Test;
 public class LogentriesRunnableTest {
 
     final Config testConfig = new TestConfig();
-    final String message = "Testing " + getClass().getName();
+    final String message = "Testing " + LogentriesRunnable.class.getName() + "\n" +
+            "with a multi-line message";
 
     @Test
     public void testDoNotThrowException() throws Exception {
