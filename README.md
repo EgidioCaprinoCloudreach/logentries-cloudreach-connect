@@ -13,7 +13,7 @@ try {
 }
 ```
 
-Install
+## Install
 Add the following to your pom.xml file.
 
 ``` xml
